@@ -55,7 +55,7 @@ def anima(i):
         global timePoint
         global t
         global PM2_5_value
-        
+
         connect.write(b"1") # send '1' command for senor reading
         data = connect.readline() # read data from Ardunio
         data = data.decode("utf-8")
@@ -79,15 +79,15 @@ def anima(i):
                 with open("sample.csv","a",newline='') as csvfile:
                         writer = csv.writer(csvfile)
                         writer.writerow(record)
-                if len(ysA) > 100:
-                        ysA = ysA[101:]
-                        timePoint = timePoint[101:]
-                        
+                if len(ysA) > 1000:
+                        ysA = ysA[1001:]
+                        timePoint = timePoint[1001:]
+                              
         axes.clear()
         axes.set(title='PM2.5 Conc.') # 設子圖title
         axes.set_ylim(0,3500) #設定y軸範圍
         axes.grid(True)
-        axes.plot([1,2,3,4,5],ysA, label="PM2.5 value")
+        
         axes.plot(timePoint,ysA, label="PM2.5 value")
         axes.legend()
 
